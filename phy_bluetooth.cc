@@ -87,6 +87,7 @@ kis_bluetooth_phy::kis_bluetooth_phy(int in_phyid) :
     pack_comp_meta = packetchain->register_packet_component("METABLOB");
     pack_comp_json = packetchain->register_packet_component("JSON");
     pack_comp_linkframe = packetchain->register_packet_component("LINKFRAME");
+    pack_comp_gps = packetchain->register_packet_component("GPS");
 
     btdev_bredr = devicetracker->get_cached_devicetype("BR/EDR");
     btdev_btle = devicetracker->get_cached_devicetype("BTLE");
@@ -134,6 +135,8 @@ int kis_bluetooth_phy::common_classifier_bluetooth(CHAINCALL_PARMS) {
     ci->transmitter = btpi->address;
     ci->channel = "FHSS";
     ci->freq_khz = 2400000;
+
+    auto pack_gpsinfo = in_pack->fetch<kis_gps_packinfo>(btphy->pack_comp_gps);
 
     return 0;
 }

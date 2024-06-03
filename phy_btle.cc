@@ -184,6 +184,7 @@ kis_btle_phy::kis_btle_phy(int in_phyid) :
 	pack_comp_linkframe = packetchain->register_packet_component("LINKFRAME");
     pack_comp_decap = packetchain->register_packet_component("DECAP");
     pack_comp_btle = packetchain->register_packet_component("BTLE");
+    pack_comp_gps = packetchain->register_packet_component("GPS");
 
     alert_bleedingtooth_ref =
         alertracker->activate_configured_alert("BLEEDINGTOOTH",
@@ -341,6 +342,7 @@ int kis_btle_phy::common_classifier(CHAINCALL_PARMS) {
         return 1;
     }
 
+    auto pack_gpsinfo = in_pack->fetch<kis_gps_packinfo>(mphy->pack_comp_gps);
 
     // Update with all the options in case we can add signal and frequency
     // in the future
