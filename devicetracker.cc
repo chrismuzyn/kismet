@@ -1321,11 +1321,12 @@ std::shared_ptr<kis_tracked_device_base>
         }
 	}
 
-    if (((in_flags & UCD_UPDATE_LOCATION) || 
-         ((in_flags & UCD_UPDATE_EMPTY_LOCATION) && !device->has_location_cloud())) &&
-            pack_gpsinfo != NULL && (device_location_signal_threshold == 0 || 
-                ( device_location_signal_threshold != 0 && pack_l1info != NULL &&
-                  pack_l1info->signal_dbm >= device_location_signal_threshold))) {
+    if (in_flags & UCD_UPDATE_LOCATION) //|| 
+         //((in_flags & UCD_UPDATE_EMPTY_LOCATION) && !device->has_location_cloud())) &&
+//            pack_gpsinfo != NULL && (device_location_signal_threshold == 0 || 
+  //              ( device_location_signal_threshold != 0 && pack_l1info != NULL &&
+ //                 pack_l1info->signal_dbm >= device_location_signal_threshold))) 
+    {
 
         auto devloc = device->get_location();
 
